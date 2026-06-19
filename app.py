@@ -50,9 +50,9 @@ def get_missing_skills(resume_text, job_description):
     return missing
 
 # ---------- UI ----------
-st.set_page_config(page_title="AI Resume Analyzer", page_icon="🎯")
+st.set_page_config(page_title="AI Resume Analyzer")
 
-st.title("🎯 AI Resume Analyzer")
+st.title("AI Resume Analyzer")
 st.write("Upload your resume and paste a job description to see how well you match!")
 
 st.divider()
@@ -70,7 +70,7 @@ job_description = st.text_area("Paste the job description here", height=200)
 st.divider()
 
 # Analyze Button
-if st.button("🔍 Analyze"):
+if st.button("Analyze"):
     if uploaded_file is None:
         st.warning("⚠️ Please upload your resume first!")
     elif job_description.strip() == "":
@@ -83,21 +83,21 @@ if st.button("🔍 Analyze"):
             missing_skills = get_missing_skills(resume_text, job_description)
 
             # Show Match Score
-            st.subheader("✅ Match Score")
+            st.subheader("Match Score")
             if score >= 70:
                 st.success(f"🎉 Your resume matches {score}% with this job!")
             elif score >= 40:
-                st.warning(f"🙂 Your resume matches {score}% with this job. Some improvements needed.")
+                st.warning(f"Your resume matches {score}% with this job. Some improvements needed.")
             else:
-                st.error(f"😟 Your resume matches only {score}%. Consider updating it.")
+                st.error(f"Your resume matches only {score}%. Consider updating it.")
 
             # Show progress bar
             st.progress(int(score))
 
             # Show Missing Skills
-            st.subheader("❌ Missing Keywords")
+            st.subheader("Missing Keywords")
             if missing_skills:
                 st.write("These keywords are in the job description but missing from your resume:")
                 st.write(", ".join(sorted(missing_skills)))
             else:
-                st.success("🎉 No missing keywords!")
+                st.success("No missing keywords!")
